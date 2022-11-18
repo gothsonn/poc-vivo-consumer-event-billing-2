@@ -21,7 +21,7 @@ spec:
         image: registry.devops.7f8254f4188647b4be19.eastus.aksapp.io/consumer-event-billing-2
         ports:
         - containerPort: 9000
-        envfrom:
+        envFrom:
           - configMapRef:
             name: cm-kafka-cd
           - secretRef:

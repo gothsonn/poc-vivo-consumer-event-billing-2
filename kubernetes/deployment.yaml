@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-event-billing-2
+  labels:
+    app: consumer-event-billing-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer-event-billing-2
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: consumer-event-billing-2
+        version: v1
+    spec:
+      containers:
+      - name: consumer-event-billing-2
+        image: registry.devops.7f8254f4188647b4be19.eastus.aksapp.io/consumer-event-billing-2
+        ports:
+        - containerPort: 9000
+        env:
+          - name: KAFKA_URL
+            value: "kafka.kafka-mirror.svc.cluster.local:9092"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-event-billing-2
+spec:
+  selector:
+    app: consumer-event-billing-2
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: consumer-event-billing-2
+spec:
+  gateways:
+    - default/default
+  hosts:
+  - consumer-event-billing-2.istio.7f8254f4188647b4be19.eastus.aksapp.io
+  http:
+  - name: "http-routes"
+    match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: consumer-event-billing-2
+        subset: v1
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: consumer-event-billing-2
+spec:
+  host: consumer-event-billing-2
+  subsets:
+  - name: v1
+    labels:
+      version: v1

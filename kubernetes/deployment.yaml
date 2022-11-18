@@ -21,9 +21,11 @@ spec:
         image: registry.devops.7f8254f4188647b4be19.eastus.aksapp.io/consumer-event-billing-2
         ports:
         - containerPort: 9000
-        env:
-          - name: KAFKA_URL
-            value: "kafka.kafka-mirror.svc.cluster.local:9092"
+        envfrom:
+          - configMapRef:
+            name: cm-kafka-cd
+          - secretRef:
+            name: sc-azure-data
 ---
 apiVersion: v1
 kind: Service

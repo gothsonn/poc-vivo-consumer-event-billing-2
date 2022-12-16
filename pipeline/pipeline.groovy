@@ -3,7 +3,7 @@ node('docker-node') {
   def name_img = "${env.JOB_NAME}"
   def image
   def version = "${buildNumber}"
-  def pubregistry = "registry.devops.7f8254f4188647b4be19.eastus.aksapp.io/"
+  def pubregistry = "registry.dvpoc.com.br/"
   stage('Checkout Repository') {
     deleteDir()
     checkout scm

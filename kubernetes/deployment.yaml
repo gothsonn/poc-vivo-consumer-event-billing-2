@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: consumer-event-billing-2
-        image: registry.devops.7f8254f4188647b4be19.eastus.aksapp.io/consumer-event-billing-2
+        image: nexus.devops.dvpoc.com.br/consumer-event-billing-2
         ports:
         - containerPort: 9000
         envFrom:
@@ -47,7 +47,7 @@ spec:
   gateways:
     - default/default
   hosts:
-  - consumer-event-billing-2.istio.7f8254f4188647b4be19.eastus.aksapp.io
+  - consumer-event-billing-2.istio.dvpoc.com.br
   http:
   - name: "http-routes"
     match:

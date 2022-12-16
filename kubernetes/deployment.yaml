@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: consumer-event-billing-2
-        image: nexus.devops.dvpoc.com.br/consumer-event-billing-2
+        image: registry.devops.dvpoc.com.br/consumer-event-billing-2
         ports:
         - containerPort: 9000
         envFrom:

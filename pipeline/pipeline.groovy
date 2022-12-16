@@ -3,7 +3,7 @@ node('docker-node') {
   def name_img = "${env.JOB_NAME}"
   def image
   def version = "${buildNumber}"
-  def pubregistry = "nexus.devops.dvpoc.com.br/"
+  def pubregistry = "registry.devops.dvpoc.com.br/"
   stage('Checkout Repository') {
     deleteDir()
     checkout scm

@@ -8,10 +8,10 @@ node('docker-node') {
     deleteDir()
     checkout scm
   }
-  stage('SonarQube Analysis') {
-    withSonarQubeEnv('sonar-poc') {
-      sh "/usr/share/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=consumer-event-billing-2"
-    }
+//  stage('SonarQube Analysis') {
+//    withSonarQubeEnv('sonar-poc') {
+//      sh "/usr/share/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=consumer-event-billing-2"
+//    }
   }
   stage('Build Image'){
       image = docker.build("$name_img")
